@@ -4,8 +4,8 @@ Microservice to handle simple comment-systems
 
 ```
 GET  /:project/comments/:post                                      // list all comments by post
-POST /:project/comments/:post?token=$hash                          // create a new comment to a post
-PUT  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.emailConfirmed=$hash  // confirm a commenters mail-address
+POST /:project/comments/:post?token=$hash&hook.data.anchor=season01e01          // create a new comment to a post
+PUT/GET  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.emailConfirmed=$hash  // confirm a commenters mail-address
 ```
 
 
@@ -19,6 +19,10 @@ PUT  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.emailC
   data: {
     emailConfirmed: true,
   },
+  actions: [{
+    type: 'redirect',
+    url: 'https://parser.signalwerk.ch/#confirm'
+  }],
   token: {
     $all: [{
       field: [:admintToken]
@@ -31,5 +35,28 @@ PUT  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.emailC
   },
 }
 ```
+
+### Webhook-Structure
+
+```
+add.comment: `https://mail.signalwerk.ch/parser/comments/confirm/
+```
+gets data: 
+
+```
+{
+  hook: {
+    data: {
+      // additional data
+    }
+  },
+  data: {
+    // data from db
+  }
+}
+```
+
+
+
 
 
