@@ -16,6 +16,10 @@ PUT/GET  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.em
 ### Auth-Structure
 ```
 {
+  auth; {
+    type: ['GET', 'PUT'],
+    path: '…'
+  }
   data: {
     emailConfirmed: true,
   },
