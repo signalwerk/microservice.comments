@@ -16,7 +16,7 @@ PUT/GET  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.em
 ### Auth-Structure
 ```
 {
-  auth; {
+  route; {
     type: ['GET', 'PUT'],
     path: '…'
   }
@@ -25,6 +25,7 @@ PUT/GET  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.em
   },
   actions: [{
     type: 'redirect',
+    if: [[route.type, '===' , 'GET']],
     url: 'https://parser.signalwerk.ch/#confirm'
   }],
   token: {
