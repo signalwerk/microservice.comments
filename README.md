@@ -20,14 +20,14 @@ PUT  /:project/comments/:post/:id/confirm/?data.emailConfirmed=true&token.emailC
     emailConfirmed: true,
   },
   token: {
-    $all: {
+    $all: [{
       field: [:admintToken]
       hash: $hash
-    },
-    emailConfirmed: {
+    }],
+    emailConfirmed: [{
       fields: [:secret, :datapath, :project, :post, :id, :value]
       hash: $hash
-    },
+    }],
   },
 }
 ```
